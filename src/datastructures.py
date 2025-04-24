@@ -9,15 +9,7 @@ class FamilyStructure:
     def __init__(self, last_name):
         self.last_name = last_name
         self._next_id = 1
-        self._members = [
-            {
-                "id": self._generate_id(),
-                "first_name": "John",
-                "last_name": last_name,
-                "age": 33,
-                "lucky_numbers": [7, 13, 22]
-            }
-        ]
+        self._members = []
 
     # This method generates a unique incremental ID
     def _generate_id(self):
@@ -28,17 +20,27 @@ class FamilyStructure:
     def add_member(self, member):
         ## You have to implement this method
         ## Append the member to the list of _members
-        pass
+        member["id"] = self._generate_id()
+        member["last_name"] = self.last_name
+        self._members.append(member)
+        return member
+        
 
     def delete_member(self, id):
         ## You have to implement this method
         ## Loop the list and delete the member with the given id
-        pass
+        for index, member in enumerate(self._members):
+            if member["id"] == id:
+                del self._members[index]
+                return self._members
 
     def get_member(self, id):
         ## You have to implement this method
         ## Loop all the members and return the one with the given id
-        pass
+        for index, member in enumerate(self._members):
+            if member["id"] == id:
+                return self._members[index]
+
 
     # This method is done, it returns a list with all the family members
     def get_all_members(self):
